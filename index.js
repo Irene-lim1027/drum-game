@@ -4,11 +4,11 @@ for(let i=0; i<drumLength; i++){
     document.querySelectorAll(".drum")[i].addEventListener("click", function(){
         let contents = this.innerHTML;
         addSound(contents);
-
+        addMotion(contents);
     })
 }
-function addSound(contents){
-    switch(contents){
+function addSound(key){
+    switch(key){
         case "w":
             let tom1= new Audio("sounds/tom-1.mp3");
             tom1.play();
@@ -39,4 +39,18 @@ function addSound(contents){
             break;
               
     }
+}
+
+document.addEventListener("keydown",function(event){
+  addSound(event.key);
+  addMotion(event.key);
+})
+
+function addMotion(currentKey){
+ let activeBtn = document.querySelector("." + currentKey);
+ activeBtn.classList.add("pressed");
+setTimeout(function(){
+    activeBtn.classList.remove("pressed");
+},100)
+
 }
